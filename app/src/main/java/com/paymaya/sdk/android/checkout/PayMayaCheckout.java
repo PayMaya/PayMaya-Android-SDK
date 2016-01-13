@@ -1,0 +1,62 @@
+package com.paymaya.sdk.android.checkout;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+
+import com.paymaya.sdk.android.common.utils.Preconditions;
+import com.paymaya.sdk.android.checkout.models.Checkout;
+
+/**
+ * Created by samfrancisco on 10/20/15.
+ */
+public final class PayMayaCheckout {
+
+    private static final int CHECKOUT_REQUEST_CODE = 707;
+    private String mClientKey;
+    private PayMayaCheckoutCallback mCallback;
+
+    /**
+     * @param clientKey
+     * @param callback
+     */
+    public PayMayaCheckout(String clientKey, PayMayaCheckoutCallback callback) {
+        mClientKey = clientKey;
+        mCallback = Preconditions.checkNotNull(callback, "callback");
+    }
+
+    /**
+     *
+     * @param activity
+     * @param checkout
+     */
+    public void execute(Activity activity, Checkout checkout) {
+        Bundle checkoutBundle = new Bundle();
+        checkoutBundle.putParcelable(PayMayaCheckoutActivity.EXTRAS_CHECKOUT, checkout);
+        Intent intent = new Intent(activity, PayMayaCheckoutActivity.class);
+        intent.putExtra(PayMayaCheckoutActivity.EXTRAS_CLIENT_KEY, mClientKey);
+        intent.putExtra(PayMayaCheckoutActivity.EXTRAS_CHECKOUT_BUNDLE, checkoutBundle);
+        activity.startActivityForResult(intent, CHECKOUT_REQUEST_CODE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CHECKOUT_REQUEST_CODE) {
+            switch (resultCode) {
+                case Activity.RESULT_OK:
+                    mCallback.onCheckoutSuccess();
+                    break;
+
+                case Activity.RESULT_CANCELED:
+                    mCallback.onCheckoutCanceled();
+                    break;
+
+                case PayMayaCheckoutActivity.RESULT_FAILURE:
+                    mCallback.onCheckoutFailure();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+}

@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+    }
+
+    lintOptions {
+        quiet false
+        abortOnError false
+        ignoreWarnings true
+    }
+
+    libraryVariants.all { variant ->
+        variant.outputs.each { output ->
+            def file = output.outputFile
+            output.outputFile = new File(file.parent, "${project.name}-${project.PAYMAYA_SDK_ANDROID_VERSION_NAME}-${variant.baseName}.aar")
+        }
+    }
+
+    buildTypes {
+//        sandbox {
+//            version project.PAYMAYA_SDK_ANDROID_VERSION_NAME + "-sandbox"
+//            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            buildConfigField "String", "API_ENDPOINT", API_CHECKOUT_ENDPOINT_SANDBOX
+//            buildConfigField "String", "API_PAYMENTS_ENDPOINT", API_PAYMENTS_ENDPOINT_SANDBOX
+//        }
+        release {
+            version project.PAYMAYA_SDK_ANDROID_VERSION_NAME
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_CHECKOUT_ENDPOINT_SANDBOX", API_CHECKOUT_ENDPOINT_SANDBOX
+            buildConfigField "String", "API_CHECKOUT_ENDPOINT_PRODUCTION", API_CHECKOUT_ENDPOINT_RELEASE
+            buildConfigField "String", "API_PAYMENTS_ENDPOINT_SANDBOX", API_PAYMENTS_ENDPOINT_SANDBOX
+            buildConfigField "String", "API_PAYMENTS_ENDPOINT_PRODUCTION", API_PAYMENTS_ENDPOINT_RELEASE
+        }
+    }
+}
+dependencies {
+    testCompile 'org.robolectric:robolectric:3.0'
+    testCompile 'junit:junit:4.12'
+}
