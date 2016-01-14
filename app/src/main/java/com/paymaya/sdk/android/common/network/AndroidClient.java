@@ -32,11 +32,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
-/**
- * Created by giaquino on 10/27/15.
- */
+import javax.net.ssl.HttpsURLConnection;
+
+
 public class AndroidClient implements Client {
 
     private static final String TAG = "AndroidClient";
@@ -86,11 +88,13 @@ public class AndroidClient implements Client {
     private HttpURLConnection initializeConnection(Request request) {
         try {
             HttpURLConnection conn = (HttpURLConnection) request.getUrl().openConnection();
-//            try {
-//                SSLHelper.injectSSLSocketFactory(conn, SSLHelper.PROTOCOL_TLS_V_1_2);
-//            } catch (NoSuchAlgorithmException | KeyManagementException ignored) {
-//                Log.d(TAG, "TLS V1.2 is not supported.");
-//            }
+            if (conn instanceof HttpsURLConnection) {
+                try {
+                    SSLHelper.injectSSLSocketFactory((HttpsURLConnection) conn, SSLHelper.PROTOCOL_TLS_V_1_2);
+                } catch (NoSuchAlgorithmException | KeyManagementException ignored) {
+                    Log.d(TAG, "TLS V1.2 is not supported.");
+                }
+            }
             conn.setReadTimeout(READ_TIMEOUT);
             conn.setConnectTimeout(CONNECTION_TIMEOUT);
             conn.setRequestProperty(CONTENT_TYPE, CONTENT_TYPE_JSON);
