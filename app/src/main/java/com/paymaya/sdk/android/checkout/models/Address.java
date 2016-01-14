@@ -25,9 +25,6 @@ import android.os.Parcelable;
 
 import static com.paymaya.sdk.android.common.utils.Preconditions.checkNotNull;
 
-/**
- * Created by samfrancisco on 10/22/15.
- */
 public final class Address implements Parcelable {
 
     private String line1;
@@ -59,11 +56,12 @@ public final class Address implements Parcelable {
     }
 
     /**
-     * @param line1
-     * @param city
-     * @param state
-     * @param zipCode
+     * @param line1       address line1
+     * @param city        city
+     * @param state       state
+     * @param zipCode     zip code
      * @param countryCode ISO 3166-1 alpha-2 country code
+     * @throws NullPointerException
      */
     public Address(String line1, String city, String state, String zipCode, String countryCode) {
         this.line1 = checkNotNull(line1, "line1");
@@ -74,12 +72,13 @@ public final class Address implements Parcelable {
     }
 
     /**
-     * @param line1
-     * @param line2
-     * @param city
-     * @param state
-     * @param zipCode
+     * @param line1       address line1
+     * @param line2       address line2
+     * @param city        city
+     * @param state       state
+     * @param zipCode     zip code
      * @param countryCode ISO 3166-1 alpha-2 country code
+     * @throws NullPointerException
      */
     public Address(String line1, String line2, String city, String state, String zipCode,
                    String countryCode) {
@@ -87,50 +86,110 @@ public final class Address implements Parcelable {
         this.line2 = line2;
     }
 
+    /**
+     *
+     * @return address line1
+     */
     public String getLine1() {
         return line1;
     }
 
+    /**
+     * Set a new value for  address line1
+     *
+     * @param line1
+     * @throws NullPointerException
+     */
     public void setLine1(String line1) {
         this.line1 = checkNotNull(line1, "line1");
     }
 
+    /**
+     *
+     * @return address line2
+     */
     public String getLine2() {
         return line2;
     }
 
+    /**
+     * Set a new value for address line2
+     *
+     * @param line2
+     */
     public void setLine2(String line2) {
         this.line2 = line2;
     }
 
+    /**
+     *
+     * @return city
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * set a new value for city
+     *
+     * @param city
+     * @throws NullPointerException
+     */
     public void setCity(String city) {
         this.city = checkNotNull(city, "city");
     }
 
+    /**
+     *
+     * @return state
+     */
     public String getState() {
         return state;
     }
 
+    /**
+     * set a new value for state
+     *
+     * @param state
+     * @throws NullPointerException
+     */
     public void setState(String state) {
         this.state = checkNotNull(state, "state");
     }
 
+    /**
+     *
+     * @return zipcode
+     */
     public String getZipCode() {
         return zipCode;
     }
 
+    /**
+     * set a new value for zip code
+     *
+     * @param zipCode
+     * @throws NullPointerException
+     */
     public void setZipCode(String zipCode) {
         this.zipCode = checkNotNull(zipCode, "zipCode");
     }
 
+    /**
+     *
+     * @return return ISO 3166-1 alpha-2 country code
+     */
     public String getCountryCode() {
         return countryCode;
     }
 
+
+    /**
+     * set a new value for country code
+     *
+     * @param countryCode ISO 3166-1 alpha-2 country code
+     * @throws NullPointerException
+     */
     public void setCountryCode(String countryCode) {
         this.countryCode = checkNotNull(countryCode, "countryCode");
     }

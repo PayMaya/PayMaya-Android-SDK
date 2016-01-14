@@ -27,9 +27,6 @@ import android.os.Bundle;
 import com.paymaya.sdk.android.common.utils.Preconditions;
 import com.paymaya.sdk.android.checkout.models.Checkout;
 
-/**
- * Created by samfrancisco on 10/20/15.
- */
 public final class PayMayaCheckout {
 
     private static final int CHECKOUT_REQUEST_CODE = 707;
@@ -46,6 +43,7 @@ public final class PayMayaCheckout {
     }
 
     /**
+     * Initiates the checkout flow
      *
      * @param activity
      * @param checkout
@@ -59,6 +57,12 @@ public final class PayMayaCheckout {
         activity.startActivityForResult(intent, CHECKOUT_REQUEST_CODE);
     }
 
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CHECKOUT_REQUEST_CODE) {
             switch (resultCode) {

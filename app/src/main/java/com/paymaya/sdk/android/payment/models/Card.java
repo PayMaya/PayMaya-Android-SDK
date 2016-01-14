@@ -24,7 +24,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by jadeantolingaa on 12/4/15.
+ * Class containing credit card information
  */
 public class Card implements Parcelable{
 
@@ -33,6 +33,25 @@ public class Card implements Parcelable{
     private String expYear;
     private String cvc;
 
+    public static final Creator<Card> CREATOR = new Creator<Card>() {
+        @Override
+        public Card createFromParcel(Parcel in) {
+            return new Card(in);
+        }
+
+        @Override
+        public Card[] newArray(int size) {
+            return new Card[size];
+        }
+    };
+
+    /**
+     *
+     * @param number   the credit card number
+     * @param expMonth the credit card expiration date in month
+     * @param expYear  the credit card expiration date in year
+     * @param cvc      the credit card cvc
+     */
     public Card(String number, String expMonth, String expYear, String cvc) {
         this.number = number;
         this.expMonth = expMonth;
@@ -47,17 +66,67 @@ public class Card implements Parcelable{
         cvc = in.readString();
     }
 
-    public static final Creator<Card> CREATOR = new Creator<Card>() {
-        @Override
-        public Card createFromParcel(Parcel in) {
-            return new Card(in);
-        }
+    /**
+     * @return the credit card number
+     */
+    public String getNumber() {
+        return number;
+    }
 
-        @Override
-        public Card[] newArray(int size) {
-            return new Card[size];
-        }
-    };
+    /**
+     * @param number the credit card number
+     */
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    /**
+     *
+     * @return the credit card expiration date in month
+     */
+    public String getExpMonth() {
+        return expMonth;
+    }
+
+    /**
+     *
+     * @param expMonth the credit card expiration date in month
+     */
+    public void setExpMonth(String expMonth) {
+        this.expMonth = expMonth;
+    }
+
+    /**
+     *
+     * @return the credit card expiration date in year
+     */
+    public String getExpYear() {
+        return expYear;
+    }
+
+    /**
+     *
+     * @param expYear the credit card expiration date in year
+     */
+    public void setExpYear(String expYear) {
+        this.expYear = expYear;
+    }
+
+    /**
+     *
+     * @return the credit card cvc
+     */
+    public String getCvc() {
+        return cvc;
+    }
+
+    /**
+     *
+     * @param cvc the credit card cvc
+     */
+    public void setCvc(String cvc) {
+        this.cvc = cvc;
+    }
 
     @Override
     public int describeContents() {
@@ -71,37 +140,4 @@ public class Card implements Parcelable{
         dest.writeString(expYear);
         dest.writeString(cvc);
     }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getExpMonth() {
-        return expMonth;
-    }
-
-    public void setExpMonth(String expMonth) {
-        this.expMonth = expMonth;
-    }
-
-    public String getExpYear() {
-        return expYear;
-    }
-
-    public void setExpYear(String expYear) {
-        this.expYear = expYear;
-    }
-
-    public String getCvc() {
-        return cvc;
-    }
-
-    public void setCvc(String cvc) {
-        this.cvc = cvc;
-    }
-
 }

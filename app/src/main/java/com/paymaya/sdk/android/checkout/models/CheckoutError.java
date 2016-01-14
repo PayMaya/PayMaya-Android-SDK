@@ -25,9 +25,6 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-/**
- * Created by giaquino on 11/3/15.
- */
 public final class CheckoutError implements Parcelable {
 
     private int code;

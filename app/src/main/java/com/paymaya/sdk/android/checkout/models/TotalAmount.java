@@ -27,9 +27,6 @@ import java.math.BigDecimal;
 
 import static com.paymaya.sdk.android.common.utils.Preconditions.checkNotNull;
 
-/**
- * Created by samfrancisco on 10/26/2015.
- */
 public final class TotalAmount implements Parcelable {
 
     private BigDecimal value;
@@ -55,34 +52,63 @@ public final class TotalAmount implements Parcelable {
     }
 
     /**
-     * @param value
+     * @param value    total amount value
      * @param currency ISO 4217 currency code
+     * @throws NullPointerException
      */
     public TotalAmount(BigDecimal value, String currency) {
         this.value = checkNotNull(value, "value");
         this.currency = checkNotNull(currency, "currency");
     }
 
+    /**
+     *
+     * @return total amount value
+     */
     public BigDecimal getValue() {
         return value;
     }
 
+    /**
+     * set a new value for total amount
+     *
+     * @param value
+     */
     public void setValue(BigDecimal value) {
         this.value = checkNotNull(value, "value");
     }
 
+    /**
+     *
+     * @return currency
+     */
     public String getCurrency() {
         return currency;
     }
 
+    /**
+     * set a new value for currency
+     *
+     * @param currency
+     * @throws NullPointerException
+     */
     public void setCurrency(String currency) {
         this.currency = checkNotNull(currency, "currency");
     }
 
+    /**
+     *
+     * @return amount details
+     */
     public AmountDetails getAmountDetails() {
         return amountDetails;
     }
 
+    /**
+     * set a new value for amount details
+     *
+     * @param amountDetails amount details (Optional)
+     */
     public void setAmountDetails(AmountDetails amountDetails) {
         this.amountDetails = amountDetails;
     }

@@ -23,9 +23,6 @@ package com.paymaya.sdk.android.checkout.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by giaquino on 11/3/15.
- */
 public final class CheckoutErrorDetails implements Parcelable {
 
     private String responseCode;

@@ -26,7 +26,7 @@ import android.os.Parcelable;
 import static com.paymaya.sdk.android.common.utils.Preconditions.checkNotNull;
 
 /**
- * Created by samfrancisco on 10/21/15.
+ * Represents the entity that bought items from the merchant's shop.
  */
 public final class Buyer implements Parcelable {
 
@@ -61,8 +61,9 @@ public final class Buyer implements Parcelable {
     }
 
     /**
-     * @param firstName
-     * @param lastName
+     * @param firstName first name
+     * @param lastName  last name
+     * @throws NullPointerException
      */
     public Buyer(String firstName, String lastName) {
         this.firstName = checkNotNull(firstName, "firstName");
@@ -70,67 +71,133 @@ public final class Buyer implements Parcelable {
     }
 
     /**
-     * @param firstName
-     * @param middleName
-     * @param lastName
+     * @param firstName  first name
+     * @param middleName middle name (Optional)
+     * @param lastName   last name
+     * @throws NullPointerException
      */
     public Buyer(String firstName, String middleName, String lastName) {
         this(firstName, lastName);
         this.middleName = middleName;
     }
 
+    /**
+     *
+     * @return buyer's first name
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * set a new value for buyer's first name
+     *
+     * @param firstName
+     * @throws NullPointerException
+     */
     public void setFirstName(String firstName) {
         this.firstName = checkNotNull(firstName, "firstName");
     }
 
+    /**
+     *
+     * @return buyer's middle name
+     */
     public String getMiddleName() {
         return middleName;
     }
 
+    /**
+     * set a new value for buyer's middle name
+     *
+     * @param middleName
+     */
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
 
+    /**
+     *
+     * @return buyer's last name
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * set a new value for buyer's last name
+     *
+     * @param lastName
+     * @throws NullPointerException
+     */
     public void setLastName(String lastName) {
         this.lastName = checkNotNull(lastName, "lastName");
     }
 
+    /**
+     *
+     * @return buyer's contact (Optional)
+     */
     public Contact getContact() {
         return contact;
     }
 
+    /**
+     * set a new value for buyer's contact
+     *
+     * @param contact
+     */
     public void setContact(Contact contact) {
         this.contact = contact;
     }
 
+    /**
+     *
+     * @return buyer's shipping address
+     */
     public Address getShippingAddress() {
         return shippingAddress;
     }
 
+    /**
+     * set a new value for buyer's shipping address
+     *
+     * @param shippingAddress
+     */
     public void setShippingAddress(Address shippingAddress) {
         this.shippingAddress = shippingAddress;
     }
 
+    /**
+     *
+     * @return buyer's billing address
+     */
     public Address getBillingAddress() {
         return billingAddress;
     }
 
+    /**
+     * set a new value for buyer's billing address
+     *
+     * @param billingAddress
+     */
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
     }
 
+    /**
+     *
+     * @return buyer's ip address
+     */
     public String getIpAddress() {
         return ipAddress;
     }
 
+    /**
+     * set a new value for buyer's ip address
+     *
+     * @param ipAddress
+     */
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }

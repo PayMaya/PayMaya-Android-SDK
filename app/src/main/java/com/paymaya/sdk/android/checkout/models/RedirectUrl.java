@@ -26,7 +26,10 @@ import android.os.Parcelable;
 import static com.paymaya.sdk.android.common.utils.Preconditions.checkNotNull;
 
 /**
- * Created by samfrancisco on 10/26/2015.
+ * All of the redirect urls are optional when creating a checkout.
+ * If none of them are provided, the buyer will be redirected to
+ * the merchant's homepage url (defined during the on-boarding process)
+ * once the payment process is done.
  */
 public final class RedirectUrl implements Parcelable {
 
@@ -35,9 +38,9 @@ public final class RedirectUrl implements Parcelable {
     private String cancelUrl;
 
     /**
-     * @param successUrl
-     * @param failureUrl
-     * @param cancelUrl
+     * @param successUrl success url
+     * @param failureUrl failure url
+     * @param cancelUrl  cancel url
      */
     public RedirectUrl(String successUrl, String failureUrl, String cancelUrl) {
         this.successUrl = checkNotNull(successUrl, "successUrl");
@@ -63,26 +66,56 @@ public final class RedirectUrl implements Parcelable {
         }
     };
 
+    /**
+     *
+     * @return success url
+     */
     public String getSuccessUrl() {
         return successUrl;
     }
 
+    /**
+     * set a new value for success url
+     *
+     * @param successUrl
+     * @throws NullPointerException
+     */
     public void setSuccessUrl(String successUrl) {
         this.successUrl = checkNotNull(successUrl, "successUrl");
     }
 
+    /**
+     *
+     * @return failure url
+     */
     public String getFailureUrl() {
         return failureUrl;
     }
 
+    /**
+     * set a new value for failure url
+     *
+     * @param failureUrl
+     * @throws NullPointerException
+     */
     public void setFailureUrl(String failureUrl) {
         this.failureUrl = checkNotNull(failureUrl, "failureUrl");
     }
 
+    /**
+     *
+     * @return cancel url
+     */
     public String getCancelUrl() {
         return cancelUrl;
     }
 
+    /**
+     * set a new value for cancel url
+     *
+     * @param cancelUrl
+     * @throws NullPointerException
+     */
     public void setCancelUrl(String cancelUrl) {
         this.cancelUrl = checkNotNull(cancelUrl, "cancelUrl");
     }

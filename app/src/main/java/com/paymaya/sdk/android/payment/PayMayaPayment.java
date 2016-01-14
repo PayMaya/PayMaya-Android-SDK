@@ -23,7 +23,7 @@ package com.paymaya.sdk.android.payment;
 import android.util.Base64;
 
 import com.paymaya.sdk.android.BuildConfig;
-import com.paymaya.sdk.android.PayMaya;
+import com.paymaya.sdk.android.PayMayaConfig;
 import com.paymaya.sdk.android.common.network.AndroidClient;
 import com.paymaya.sdk.android.common.network.Request;
 import com.paymaya.sdk.android.common.network.Response;
@@ -37,25 +37,32 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Created by jadeantolingaa on 12/4/15.
- */
 public class PayMayaPayment {
 
-    private String mUuidIdempotentKey;
     private Card mCard;
     private String mClientKey;
+    private String mUuidIdempotentKey;
 
+    /**
+     * @param clientKey Public API key
+     * @param card      User's Credit Card details
+     */
     public PayMayaPayment(String clientKey, Card card) {
         mClientKey = clientKey;
         mCard = card;
         mUuidIdempotentKey = UUID.randomUUID().toString();
     }
 
+    /**
+     * Request and returns a payment token
+     *
+     * @return PaymentToken
+     * @throws PayMayaPaymentException
+     */
     public PaymentToken getPaymentToken() throws PayMayaPaymentException {
         try {
             Request request = new Request(Request.Method.POST,
-                    PayMaya.getEnvironment() == PayMaya.ENVIRONMENT_PRODUCTION ? BuildConfig
+                    PayMayaConfig.getEnvironment() == PayMayaConfig.ENVIRONMENT_PRODUCTION ? BuildConfig
                             .API_PAYMENTS_ENDPOINT_PRODUCTION : BuildConfig
                             .API_PAYMENTS_ENDPOINT_SANDBOX + "/payment-tokens");
 

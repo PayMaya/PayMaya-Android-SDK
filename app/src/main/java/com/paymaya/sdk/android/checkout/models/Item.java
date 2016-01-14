@@ -25,9 +25,6 @@ import android.os.Parcelable;
 
 import com.paymaya.sdk.android.common.utils.Preconditions;
 
-/**
- * Created by samfrancisco on 10/26/2015.
- */
 public class Item implements Parcelable {
 
     private String name;
@@ -59,9 +56,10 @@ public class Item implements Parcelable {
     }
 
     /**
-     * @param name
-     * @param quantity
-     * @param totalAmount
+     * @param name         item's name
+     * @param quantity     quantity
+     * @param totalAmount  total amount
+     * @throws NullPointerException
      */
     public Item(String name, int quantity, TotalAmount totalAmount) {
         this.name = Preconditions.checkNotNull(name, "name");
@@ -69,50 +67,107 @@ public class Item implements Parcelable {
         this.totalAmount = Preconditions.checkNotNull(totalAmount, "totalAmount");
     }
 
+    /**
+     *
+     * @return item's name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * set a new value for item's name
+     *
+     * @param name item's name
+     * @throws NullPointerException
+     */
     public void setName(String name) {
         this.name = Preconditions.checkNotNull(name, "name");
     }
 
+    /**
+     *
+     * @return quantity
+     */
     public int getQuantity() {
         return quantity;
     }
 
+    /**
+     * set a new value for quantity
+     *
+     * @param quantity
+     * @throws NullPointerException
+     */
     public void setQuantity(int quantity) {
         this.quantity = Preconditions.checkNotNull(quantity, "quantity");
     }
 
+    /**
+     *
+     * @return sku code
+     */
     public String getSkuCode() {
         return skuCode;
     }
 
+    /**
+     * set a new value for sku code
+     *
+     * @param skuCode
+     */
     public void setSkuCode(String skuCode) {
         this.skuCode = skuCode;
     }
 
+    /**
+     *
+     * @return item's description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * set a new value for description
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return additional item amount details
+     */
     public ItemAmount getItemAmount() {
         return itemAmount;
     }
 
+    /**
+     * set a new value for item amount
+     *
+     * @param itemAmount
+     */
     public void setItemAmount(ItemAmount itemAmount) {
         this.itemAmount = itemAmount;
     }
 
+    /**
+     *
+     * @return total amount
+     */
     public TotalAmount getTotalAmount() {
         return totalAmount;
     }
 
+    /**
+     * set a new value for total amount
+     *
+     * @param totalAmount
+     * @throws NullPointerException
+     */
     public void setTotalAmount(TotalAmount totalAmount) {
         this.totalAmount = Preconditions.checkNotNull(totalAmount, "totalAmount");
     }

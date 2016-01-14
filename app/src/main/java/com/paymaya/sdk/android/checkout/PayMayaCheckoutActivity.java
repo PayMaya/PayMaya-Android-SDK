@@ -27,14 +27,13 @@ import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.paymaya.sdk.android.BuildConfig;
-import com.paymaya.sdk.android.PayMaya;
+import com.paymaya.sdk.android.PayMayaConfig;
 import com.paymaya.sdk.android.R;
 import com.paymaya.sdk.android.common.utils.JSONUtils;
 import com.paymaya.sdk.android.common.utils.Preconditions;
@@ -58,14 +57,11 @@ public final class PayMayaCheckoutActivity extends Activity {
     public static final int RESULT_FAILURE = 1063;
 
     public static final String EXTRAS_CLIENT_KEY = "extras_client_key";
-    public static final String EXTRAS_CLIENT_SECRET = "extras_client_secret";
     public static final String EXTRAS_CHECKOUT = "extras_checkout";
     public static final String EXTRAS_CHECKOUT_BUNDLE = "extras_bundle";
 
     private Checkout mCheckout;
-
     private String mClientKey;
-
     private WebView mWebView;
     private ProgressBar mProgressBar;
     private String mSessionRedirectUrl;
@@ -103,7 +99,6 @@ public final class PayMayaCheckoutActivity extends Activity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 RedirectUrl redirectUrl = mCheckout.getRedirectUrl();
-
                 if (url.startsWith(redirectUrl.getSuccessUrl())) {
                     finishSuccess();
                     return true;
@@ -133,8 +128,8 @@ public final class PayMayaCheckoutActivity extends Activity {
             @Override
             protected Response doInBackground(Void... voids) {
                 try {
-                    Request request = new Request(Request.Method.POST, PayMaya.getEnvironment()
-                            == PayMaya.ENVIRONMENT_PRODUCTION ?
+                    Request request = new Request(Request.Method.POST, PayMayaConfig.getEnvironment()
+                            == PayMayaConfig.ENVIRONMENT_PRODUCTION ?
                             BuildConfig.API_CHECKOUT_ENDPOINT_PRODUCTION :
                             BuildConfig.API_CHECKOUT_ENDPOINT_SANDBOX + "/checkouts");
 

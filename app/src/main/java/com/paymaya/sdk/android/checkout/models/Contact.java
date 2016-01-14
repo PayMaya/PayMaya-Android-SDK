@@ -24,13 +24,19 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by samfrancisco on 10/22/15.
+ * Represents buyer's contact details. If the email field is provided,
+ * a payment receipt will be sent to the email address.
  */
 public final class Contact implements Parcelable {
 
     private String phone;
     private String email;
 
+    /**
+     *
+     * @param phone buyer's phone number
+     * @param email buyer's email address
+     */
     public Contact(String phone, String email) {
         this.phone = phone;
         this.email = email;
@@ -53,18 +59,36 @@ public final class Contact implements Parcelable {
         }
     };
 
+    /**
+     *
+     * @return buyer's phone number
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     * set a new value for buyer's phone number
+     *
+     * @param phone
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     *
+     * @return buyer's email address
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * set a new value for buyer's email address
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }

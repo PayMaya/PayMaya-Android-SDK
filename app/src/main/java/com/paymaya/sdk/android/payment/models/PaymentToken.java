@@ -26,7 +26,9 @@ import android.os.Parcelable;
 import java.util.Date;
 
 /**
- * Created by jadeantolingaa on 12/4/15.
+ * Represents payment token, payment tokens go through the following states: created and used.
+ * When you request for a card token, it will have the initial state of created. Payment tokens
+ * with state created are used for charging money from your customers.
  */
 public class PaymentToken implements Parcelable {
 
@@ -37,17 +39,26 @@ public class PaymentToken implements Parcelable {
     private Date createdAt;
     private Date updatedAt;
 
-    public PaymentToken(String paymentTokenId, String env, String type, String state, Date
-            createdAt, Date updatedAt) {
+    public PaymentToken() {
+    }
+
+    /**
+     *
+     * @param paymentTokenId the payment token id
+     * @param env            env
+     * @param type           type
+     * @param state          state
+     * @param createdAt      date timestamp when payment token is created
+     * @param updatedAt      date timestamp when payment token is updated
+     */
+    public PaymentToken(String paymentTokenId, String env, String type, String state,
+                        Date createdAt, Date updatedAt) {
         this.paymentTokenId = paymentTokenId;
         this.env = env;
         this.type = type;
         this.state = state;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-    }
-
-    public PaymentToken() {
     }
 
     protected PaymentToken(Parcel in) {
@@ -86,6 +97,10 @@ public class PaymentToken implements Parcelable {
         dest.writeSerializable(updatedAt);
     }
 
+    /**
+     *
+     * @return the payment token id
+     */
     public String getPaymentTokenId() {
         return paymentTokenId;
     }
@@ -94,6 +109,11 @@ public class PaymentToken implements Parcelable {
         this.paymentTokenId = paymentTokenId;
     }
 
+
+    /**
+     *
+     * @return env
+     */
     public String getEnv() {
         return env;
     }
@@ -102,6 +122,10 @@ public class PaymentToken implements Parcelable {
         this.env = env;
     }
 
+    /**
+     *
+     * @return type
+     */
     public String getType() {
         return type;
     }
@@ -110,6 +134,10 @@ public class PaymentToken implements Parcelable {
         this.type = type;
     }
 
+    /**
+     *
+     * @return state
+     */
     public String getState() {
         return state;
     }
@@ -118,6 +146,10 @@ public class PaymentToken implements Parcelable {
         this.state = state;
     }
 
+    /**
+     *
+     * @return date timestamp when payment token is created
+     */
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -126,6 +158,10 @@ public class PaymentToken implements Parcelable {
         this.createdAt = createdAt;
     }
 
+    /**
+     *
+     * @return date timestamp when payment token is updated
+     */
     public Date getUpdatedAt() {
         return updatedAt;
     }

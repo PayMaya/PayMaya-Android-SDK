@@ -33,7 +33,8 @@ import java.util.List;
 import static com.paymaya.sdk.android.common.utils.Preconditions.checkNotNull;
 
 /**
- * Created by samfrancisco on 10/26/2015.
+ * A Checkout contains information about the buyer, the items inside the cart, transaction amount,
+ * status of payment and other details.
  */
 public final class Checkout implements Parcelable {
 
@@ -77,72 +78,146 @@ public final class Checkout implements Parcelable {
     }
 
     /**
-     * @param totalAmount
-     * @param buyer
-     * @param itemList
-     * @param requestReferenceNumber
+     * @param totalAmount            transaction total amount details
+     * @param buyer                  costumer details
+     * @param itemList               item list
+     * @param requestReferenceNumber reference number assigned by the merchant to identify a
+     *                               transaction
+     * @throws NullPointerException
      */
-    public Checkout(TotalAmount totalAmount, Buyer buyer, List<Item> itemList, String requestReferenceNumber, RedirectUrl redirectUrl) {
+    public Checkout(TotalAmount totalAmount, Buyer buyer, List<Item> itemList,
+                    String requestReferenceNumber, RedirectUrl redirectUrl) {
         this.totalAmount = checkNotNull(totalAmount, "totalAmount");
         this.buyer = checkNotNull(buyer, "buyer");
         this.itemList = checkNotNull(itemList, "items");
-        this.requestReferenceNumber = checkNotNull(requestReferenceNumber, "requestReferenceNumber");
+        this.requestReferenceNumber = checkNotNull(requestReferenceNumber,
+                "requestReferenceNumber");
         this.redirectUrl = checkNotNull(redirectUrl, "redirectUrl");
         isAutoRedirect = false;
     }
 
+    /**
+     *
+     * @return transaction total amount details
+     */
     public TotalAmount getTotalAmount() {
         return totalAmount;
     }
 
+    /**
+     * set a new value for transaction total amount details
+     *
+     * @param totalAmount transaction total amount details
+     * @throws NullPointerException
+     */
     public void setTotalAmount(TotalAmount totalAmount) {
         this.totalAmount = checkNotNull(totalAmount, "totalAmount");
     }
 
+    /**
+     *
+     * @return costumer details
+     */
     public Buyer getBuyer() {
         return buyer;
     }
 
+    /**
+     * set a new value for costumer details
+     *
+     * @param buyer costumer details
+     * @throws NullPointerException
+     */
     public void setBuyer(Buyer buyer) {
         this.buyer = checkNotNull(buyer, "buyer");
     }
 
+    /**
+     *
+     * @return item list
+     */
     public List<Item> getItemList() {
         return itemList;
     }
 
+    /**
+     * set a new value for item list
+     *
+     * @param itemList
+     * @throws NullPointerException
+     */
     public void setItemList(List<Item> itemList) {
         this.itemList = checkNotNull(itemList, "items");
     }
 
+    /**
+     *
+     * @return set of redirect URLs upon checkout completion
+     */
     public RedirectUrl getRedirectUrl() {
         return redirectUrl;
     }
 
+    /**
+     * set a new value for redirect url
+     *
+     * @param redirectUrl redirect URLS upon checkout completion
+     * @throws NullPointerException
+     */
     public void setRedirectUrl(RedirectUrl redirectUrl) {
         this.redirectUrl = checkNotNull(redirectUrl, "redirectUrl");
     }
 
+    /**
+     *
+     * @return reference number assigned by the merchant to identify a transaction
+     */
     public String getRequestReferenceNumber() {
         return requestReferenceNumber;
     }
 
+    /**
+     * set a new value for request reference number
+     *
+     * @param requestReferenceNumber reference number assigned by the merchant to identify a
+     *                               transaction
+     * @throws NullPointerException
+     */
     public void setRequestReferenceNumber(String requestReferenceNumber) {
         this.requestReferenceNumber = checkNotNull(requestReferenceNumber, "requestReferenceNumber");
     }
 
+    /**
+     * Defines the behaviour of the checkout
+     *
+     * @return boolean
+     */
     public boolean isAutoRedirect() {
         return isAutoRedirect;
     }
 
+    /**
+     * defines new behaviour for checkout
+     *
+     * @param isAutoRedirect
+     */
     public void setAutoRedirect(boolean isAutoRedirect) {
         this.isAutoRedirect = isAutoRedirect;
     }
 
+    /**
+     *
+     * @return additional cart information
+     */
     public JSONObject getMetadata() {
         return metadata;
     }
 
+    /**
+     * set a new value for metadata
+     *
+     * @param metadata additional cart information (Optional)
+     */
     public void setMetadata(JSONObject metadata) {
         this.metadata = metadata;
     }

@@ -28,7 +28,7 @@ import com.paymaya.sdk.android.common.utils.Preconditions;
 import java.math.BigDecimal;
 
 /**
- * Created by samfrancisco on 10/26/2015.
+ * Represents detail about each item's amount
  */
 public final class ItemAmount implements Parcelable {
 
@@ -52,22 +52,44 @@ public final class ItemAmount implements Parcelable {
         details = in.readParcelable(AmountDetails.class.getClassLoader());
     }
 
+    /**
+     *
+     * @param value item value
+     */
     public ItemAmount(BigDecimal value) {
         this.value = Preconditions.checkNotNull(value, "value");
     }
 
+    /**
+     *
+     * @return item value
+     */
     public BigDecimal getValue() {
         return value;
     }
 
+    /**
+     * set a new value for item
+     *
+     * @param value item value
+     */
     public void setValue(BigDecimal value) {
         this.value = value;
     }
 
+    /**
+     *
+     * @return item amount additional details
+     */
     public AmountDetails getDetails() {
         return details;
     }
 
+    /**
+     * set a new value for item amount details
+     *
+     * @param details
+     */
     public void setDetails(AmountDetails details) {
         this.details = details;
     }

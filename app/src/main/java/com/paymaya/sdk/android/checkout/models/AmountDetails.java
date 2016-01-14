@@ -27,9 +27,6 @@ import java.math.BigDecimal;
 
 import static com.paymaya.sdk.android.common.utils.Preconditions.checkNotNull;
 
-/**
- * Created by samfrancisco on 10/26/2015.
- */
 public final class AmountDetails implements Parcelable {
 
     private BigDecimal discount;
@@ -59,11 +56,12 @@ public final class AmountDetails implements Parcelable {
     }
 
     /**
-     * @param discount
-     * @param serviceCharge
-     * @param shippingFee
-     * @param tax
-     * @param subtotal
+     * @param discount      discount
+     * @param serviceCharge service charge
+     * @param shippingFee   shipping fee
+     * @param tax           tax
+     * @param subtotal      subtotal
+     * @throws NullPointerException
      */
     public AmountDetails(BigDecimal discount, BigDecimal serviceCharge, BigDecimal shippingFee,
                          BigDecimal tax, BigDecimal subtotal) {
@@ -74,42 +72,91 @@ public final class AmountDetails implements Parcelable {
         this.subtotal = checkNotNull(subtotal, "subtotal");
     }
 
+    /**
+     *
+     * @return discount
+     */
     public BigDecimal getDiscount() {
         return discount;
     }
 
+    /**
+     * set a new value for discount
+     *
+     * @param discount
+     * @throws NullPointerException
+     */
     public void setDiscount(BigDecimal discount) {
         this.discount = checkNotNull(discount, "discount");
     }
 
+    /**
+     *
+     * @return service charge
+     */
     public BigDecimal getServiceCharge() {
         return serviceCharge;
     }
 
+    /**
+     * set a new value for service charge
+     *
+     * @param serviceCharge
+     * @throws NullPointerException
+     */
     public void setServiceCharge(BigDecimal serviceCharge) {
         this.serviceCharge = checkNotNull(serviceCharge, "serviceCharge");
     }
 
+    /**
+     *
+     * @return shipping fee
+     */
     public BigDecimal getShippingFee() {
         return shippingFee;
     }
 
+    /**
+     * set a new value for shipping fee
+     *
+     * @param shippingFee
+     * @throws NullPointerException
+     */
     public void setShippingFee(BigDecimal shippingFee) {
         this.shippingFee = checkNotNull(shippingFee, "shippingFee");
     }
 
+    /**
+     *
+     * @return tax
+     */
     public BigDecimal getTax() {
         return tax;
     }
 
+    /**
+     * set a new value for tax
+     *
+     * @param tax
+     */
     public void setTax(BigDecimal tax) {
         this.tax = checkNotNull(tax, "tax");
     }
 
+    /**
+     *
+     * @return subtotal
+     */
     public BigDecimal getSubtotal() {
         return subtotal;
     }
 
+    /**
+     * set a new value for subtotal
+     *
+     * @param subtotal
+     * @throws NullPointerException
+     */
     public void setSubtotal(BigDecimal subtotal) {
         this.subtotal = checkNotNull(subtotal, "subtotal");
     }
