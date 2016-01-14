@@ -20,21 +20,36 @@
 
 package com.paymaya.sdk.android;
 
-/**
- * Created by giaquino on 1/6/16.
- */
-public class PayMaya {
+public class PayMayaConfig {
 
     public static final int ENVIRONMENT_SANDBOX = 0;
     public static final int ENVIRONMENT_PRODUCTION = 1;
 
-    private static int environment;
+    /**
+     * Enable DEBUG to display logs
+     */
+    public static boolean DEBUG = false;
 
-    public static void init(int environment) {
-        PayMaya.environment = environment;
+    /**
+     * Current API environment. Defaults to PayMayaConfig.ENVIRONMENT_SANDBOX
+     */
+    private static int ENVIRONMENT = ENVIRONMENT_SANDBOX;
+
+    /**
+     * Sets the API environment to be use. Defaults to PayMayaConfig.ENVIRONMENT_SANDBOX
+     *
+     * @param environment the API environment
+     */
+    public static void setEnvironment(int environment) {
+        ENVIRONMENT = environment;
     }
 
+    /**
+     * Returns the current API environment.
+     *
+     * @return the current API environment
+     */
     public static int getEnvironment() {
-        return environment;
+        return ENVIRONMENT;
     }
 }

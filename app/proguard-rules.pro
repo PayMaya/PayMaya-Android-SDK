@@ -18,4 +18,4 @@
 
 -keep class com.paymaya.sdk.android.checkout.** { *; }
 -keep class com.paymaya.sdk.android.payment.** { *; }
--keep class com.paymaya.sdk.android.PayMaya { *; }
+-keep class com.paymaya.sdk.android.PayMayaConfig { *; }
