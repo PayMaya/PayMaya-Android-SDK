@@ -131,7 +131,7 @@ public final class PayMayaCheckoutActivity extends Activity {
                     Request request = new Request(Request.Method.POST, PayMayaConfig.getEnvironment()
                             == PayMayaConfig.ENVIRONMENT_PRODUCTION ?
                             BuildConfig.API_CHECKOUT_ENDPOINT_PRODUCTION :
-                            BuildConfig.API_CHECKOUT_ENDPOINT_SANDBOX + "/checkouts");
+                            BuildConfig.API_CHECKOUT_ENDPOINT_SANDBOX);
 
                     byte[] body = JSONUtils.toJSON(mCheckout).toString().getBytes();
                     request.setBody(body);
