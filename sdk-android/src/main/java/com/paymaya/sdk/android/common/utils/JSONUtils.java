@@ -34,6 +34,7 @@ import com.paymaya.sdk.android.checkout.models.Item;
 import com.paymaya.sdk.android.checkout.models.ItemAmount;
 import com.paymaya.sdk.android.checkout.models.RedirectUrl;
 import com.paymaya.sdk.android.checkout.models.TotalAmount;
+import com.paymaya.sdk.android.payment.PayMayaPaymentException;
 import com.paymaya.sdk.android.payment.models.Card;
 import com.paymaya.sdk.android.payment.models.PaymentToken;
 
@@ -104,11 +105,17 @@ public final class JSONUtils {
         return null;
     }
 
-    public static PaymentToken fromJSONPaymentToken(String json) throws JSONException {
+    public static PaymentToken fromJSONPaymentToken(String json)
+            throws JSONException, PayMayaPaymentException {
         final String dateTimeFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
         JSONObject root = new JSONObject(json);
         Log.d("@fromJsonPaymentToken", "Json root = " + root.toString());
+
+        if (root.has("error")) {
+            throw new PayMayaPaymentException(root.getString("error"));
+        }
+
         PaymentToken paymentToken = new PaymentToken();
         paymentToken.setPaymentTokenId(root.getString("paymentTokenId"));
         paymentToken.setState(root.getString("state"));
