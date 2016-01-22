@@ -75,7 +75,9 @@ public final class PayMayaCheckout {
                     break;
 
                 case PayMayaCheckoutActivity.RESULT_FAILURE:
-                    mCallback.onCheckoutFailure();
+                    String failureMessage = data.getStringExtra(
+                            PayMayaCheckoutActivity.EXTRAS_FAILURE_MESSAGE);
+                    mCallback.onCheckoutFailure(failureMessage);
                     break;
 
                 default:

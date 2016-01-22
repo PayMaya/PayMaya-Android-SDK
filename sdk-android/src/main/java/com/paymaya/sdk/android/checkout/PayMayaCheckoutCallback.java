@@ -26,6 +26,6 @@ public interface PayMayaCheckoutCallback {
 
     void onCheckoutCanceled();
 
-    void onCheckoutFailure();
+    void onCheckoutFailure(String message);
 
 }

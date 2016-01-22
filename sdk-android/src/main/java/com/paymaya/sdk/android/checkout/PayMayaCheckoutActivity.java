@@ -59,6 +59,7 @@ public final class PayMayaCheckoutActivity extends Activity {
     public static final String EXTRAS_CLIENT_KEY = "extras_client_key";
     public static final String EXTRAS_CHECKOUT = "extras_checkout";
     public static final String EXTRAS_CHECKOUT_BUNDLE = "extras_bundle";
+    public static final String EXTRAS_FAILURE_MESSAGE = "extras_failure_message";
 
     private Checkout mCheckout;
     private String mClientKey;
@@ -106,7 +107,7 @@ public final class PayMayaCheckoutActivity extends Activity {
                     finishCanceled();
                     return true;
                 } else if (url.startsWith(redirectUrl.getFailureUrl())) {
-                    finishFailure();
+                    finishFailure(redirectUrl.getFailureUrl());
                     return true;
                 }
                 return super.shouldOverrideUrlLoading(view, url);
@@ -166,10 +167,10 @@ public final class PayMayaCheckoutActivity extends Activity {
 
                         loadUrl(mSessionRedirectUrl);
                     } catch (JSONException e) {
-                        finishFailure();
+                        finishFailure(e.getMessage());
                     }
                 } else {
-                    finishFailure();
+                    finishFailure(response.getResponse());
                 }
             }
         }.execute();
@@ -187,8 +188,9 @@ public final class PayMayaCheckoutActivity extends Activity {
         finish();
     }
 
-    private void finishFailure() {
+    private void finishFailure(String message) {
         Intent intent = new Intent();
+        intent.putExtra(EXTRAS_FAILURE_MESSAGE, message);
         setResult(RESULT_FAILURE, intent);
         finish();
     }
