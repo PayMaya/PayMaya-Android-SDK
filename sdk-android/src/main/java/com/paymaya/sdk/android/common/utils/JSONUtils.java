@@ -105,8 +105,7 @@ public final class JSONUtils {
         return null;
     }
 
-    public static PaymentToken fromJSONPaymentToken(String json)
-            throws JSONException, PayMayaPaymentException {
+    public static PaymentToken fromJSONPaymentToken(String json) throws JSONException {
         final String dateTimeFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
         JSONObject root = new JSONObject(json);

@@ -20,7 +20,7 @@
 
 package com.paymaya.sdk.android.payment;
 
-public class PayMayaPaymentException extends Exception {
+public class PayMayaPaymentException extends RuntimeException {
 
     public PayMayaPaymentException(String message) {
         super(message, null);

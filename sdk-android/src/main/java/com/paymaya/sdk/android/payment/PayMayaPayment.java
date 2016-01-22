@@ -87,6 +87,8 @@ public class PayMayaPayment {
             return JSONUtils.fromJSONPaymentToken(response.getResponse());
         } catch (JSONException je) {
             throw new PayMayaPaymentException("Unknown Error", je);
+        } catch (PayMayaPaymentException ppe) {
+            throw new PayMayaPaymentException(ppe.getMessage());
         }
 
     }
