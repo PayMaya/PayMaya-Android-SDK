@@ -164,8 +164,6 @@ public final class PayMayaCheckoutActivity extends Activity {
                             mSessionRedirectUrl += "&cssfix=true";
                         }
 
-                        Log.i("SAMTEST", "mSessionRedirectUrl : " + mSessionRedirectUrl);
-                        Toast.makeText(PayMayaCheckoutActivity.this, mSessionRedirectUrl, Toast.LENGTH_SHORT).show();
                         loadUrl(mSessionRedirectUrl);
                     } catch (JSONException e) {
                         finishFailure();
