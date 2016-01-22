@@ -74,6 +74,7 @@ public class AndroidClient implements Client {
             } else {
                 response = read(conn.getInputStream());
             }
+
             Log.d(TAG, "Status: " + code + " " + message);
             Log.d(TAG, "Response: " + new JSONObject(response).toString(2));
             return new Response(code, response);
@@ -92,7 +93,7 @@ public class AndroidClient implements Client {
                 try {
                     SSLHelper.injectSSLSocketFactory((HttpsURLConnection) conn, SSLHelper.PROTOCOL_TLS_V_1_2);
                 } catch (NoSuchAlgorithmException | KeyManagementException ignored) {
-                    Log.d(TAG, "TLS V1.2 is not supported.");
+                    Log.w(TAG, "TLS V1.2 is not supported.");
                 }
             }
             conn.setReadTimeout(READ_TIMEOUT);
@@ -105,7 +106,7 @@ public class AndroidClient implements Client {
             }
             return conn;
         } catch (IOException e) {
-            Log.d(TAG, e.getMessage());
+            Log.e(TAG, e.getMessage());
             throw new RuntimeException("Invalid URL: " + request.getUrl());
         }
     }
