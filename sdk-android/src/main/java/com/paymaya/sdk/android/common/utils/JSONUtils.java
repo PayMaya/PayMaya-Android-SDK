@@ -118,8 +118,8 @@ public final class JSONUtils {
         PaymentToken paymentToken = new PaymentToken();
         paymentToken.setPaymentTokenId(root.getString("paymentTokenId"));
         paymentToken.setState(root.getString("state"));
-        paymentToken.setEnv(root.getString("env"));
-        paymentToken.setType(root.getString("type"));
+        paymentToken.setEnv(root.optString("env"));
+        paymentToken.setType(root.optString("type"));
 
         paymentToken.setCreatedAt(DateUtils.formatDate(root.getString("createdAt"), dateTimeFormat));
         paymentToken.setUpdatedAt(DateUtils.formatDate(root.getString("updatedAt"), dateTimeFormat));
