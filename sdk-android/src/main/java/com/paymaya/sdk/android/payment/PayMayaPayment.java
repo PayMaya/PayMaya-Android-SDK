@@ -21,6 +21,7 @@
 package com.paymaya.sdk.android.payment;
 
 import android.util.Base64;
+import android.util.Log;
 
 import com.paymaya.sdk.android.BuildConfig;
 import com.paymaya.sdk.android.PayMayaConfig;
@@ -61,10 +62,13 @@ public class PayMayaPayment {
      */
     public PaymentToken getPaymentToken() throws PayMayaPaymentException {
         try {
-            Request request = new Request(Request.Method.POST,
-                    PayMayaConfig.getEnvironment() == PayMayaConfig.ENVIRONMENT_PRODUCTION ? BuildConfig
-                            .API_PAYMENTS_ENDPOINT_PRODUCTION : BuildConfig
-                            .API_PAYMENTS_ENDPOINT_SANDBOX + "/payment-tokens");
+            String productionEndpoint = BuildConfig.API_PAYMENTS_ENDPOINT_PRODUCTION + "/payment-tokens";
+            String sandboxEndpoint = BuildConfig.API_PAYMENTS_ENDPOINT_SANDBOX + "/payment-tokens";
+            String envEndpoint = PayMayaConfig.getEnvironment() == PayMayaConfig.ENVIRONMENT_PRODUCTION ? productionEndpoint : sandboxEndpoint;
+
+            Log.d("@fromPayMayaPayment", "envEndpoint = " + envEndpoint);
+
+            Request request = new Request(Request.Method.POST, envEndpoint);
 
             byte[] body = JSONUtils.toJSON(mCard).toString().getBytes();
             request.setBody(body);
