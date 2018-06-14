@@ -17,7 +17,7 @@ ext {
 
     developerId = 'paymaya'
     developerName = 'PayMaya Philippines, Inc.'
-    developerEmail = 'ssfrancisco@voyagerinnovation.com'
+    developerEmail = 'paymentgatewayteam@paymaya.com'
 
     licenseName = 'The MIT License (MIT)'
     licenseUrl = 'https://opensource.org/licenses/MIT'
@@ -42,20 +42,22 @@ android {
     }
 
     libraryVariants.all { variant ->
-        variant.outputs.each { output ->
+        variant.outputs.all { output ->
             def file = output.outputFile
-            output.outputFile = new File(file.parent, "${project.name}-${project.PAYMAYA_SDK_ANDROID_VERSION_NAME}-${variant.baseName}.aar")
+            outputFileName = "${project.name}-${project.PAYMAYA_SDK_ANDROID_VERSION_NAME}-${variant.baseName}.aar"
         }
     }
 
     buildTypes {
-//        sandbox {
-//            version project.PAYMAYA_SDK_ANDROID_VERSION_NAME + "-sandbox"
-//            minifyEnabled true
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            buildConfigField "String", "API_ENDPOINT", API_CHECKOUT_ENDPOINT_SANDBOX
-//            buildConfigField "String", "API_PAYMENTS_ENDPOINT", API_PAYMENTS_ENDPOINT_SANDBOX
-//        }
+        debug {
+            version project.PAYMAYA_SDK_ANDROID_VERSION_NAME
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_CHECKOUT_ENDPOINT_SANDBOX", API_CHECKOUT_ENDPOINT_SANDBOX
+            buildConfigField "String", "API_CHECKOUT_ENDPOINT_PRODUCTION", API_CHECKOUT_ENDPOINT_RELEASE
+            buildConfigField "String", "API_PAYMENTS_ENDPOINT_SANDBOX", API_PAYMENTS_ENDPOINT_SANDBOX
+            buildConfigField "String", "API_PAYMENTS_ENDPOINT_PRODUCTION", API_PAYMENTS_ENDPOINT_RELEASE
+        }
         release {
             version project.PAYMAYA_SDK_ANDROID_VERSION_NAME
             minifyEnabled true
