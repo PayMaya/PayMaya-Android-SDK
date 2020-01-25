@@ -58,7 +58,7 @@ public final class PayMayaCheckout {
     }
 
     /**
-     *
+     * For PayMayaCheckoutCallback class
      * @param requestCode
      * @param resultCode
      * @param data
@@ -67,7 +67,9 @@ public final class PayMayaCheckout {
         if (requestCode == CHECKOUT_REQUEST_CODE) {
             switch (resultCode) {
                 case Activity.RESULT_OK:
-                    mCallback.onCheckoutSuccess();
+                    String checkoutID = data.getStringExtra(
+                            PayMayaCheckoutActivity.EXTRAS_CHECKOUT_UUID);
+                    mCallback.onCheckoutSuccess(checkoutID);
                     break;
 
                 case Activity.RESULT_CANCELED:

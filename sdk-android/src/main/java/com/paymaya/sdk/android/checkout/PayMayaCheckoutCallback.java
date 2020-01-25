@@ -22,7 +22,7 @@ package com.paymaya.sdk.android.checkout;
 
 public interface PayMayaCheckoutCallback {
 
-    void onCheckoutSuccess();
+    void onCheckoutSuccess(String checkoutId);
 
     void onCheckoutCanceled();
 

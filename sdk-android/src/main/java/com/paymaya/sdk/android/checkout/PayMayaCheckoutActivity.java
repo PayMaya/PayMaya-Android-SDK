@@ -58,6 +58,7 @@ public final class PayMayaCheckoutActivity extends Activity {
 
     public static final String EXTRAS_CLIENT_KEY = "extras_client_key";
     public static final String EXTRAS_CHECKOUT = "extras_checkout";
+    public static final String EXTRAS_CHECKOUT_UUID = "extras_checkout_uuid";
     public static final String EXTRAS_CHECKOUT_BUNDLE = "extras_bundle";
     public static final String EXTRAS_FAILURE_MESSAGE = "extras_failure_message";
 
@@ -101,7 +102,7 @@ public final class PayMayaCheckoutActivity extends Activity {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 RedirectUrl redirectUrl = mCheckout.getRedirectUrl();
                 if (url.startsWith(redirectUrl.getSuccessUrl())) {
-                    finishSuccess();
+                    finishSuccess(mSessionCheckoutId);
                     return true;
                 } else if (url.startsWith(redirectUrl.getCancelUrl())) {
                     finishCanceled();
@@ -176,8 +177,9 @@ public final class PayMayaCheckoutActivity extends Activity {
         }.execute();
     }
 
-    private void finishSuccess() {
+    private void finishSuccess(String checkoutId) {
         Intent intent = new Intent();
+        intent.putExtra(EXTRAS_CHECKOUT_UUID, checkoutId);
         setResult(Activity.RESULT_OK, intent);
         finish();
     }
